@@ -5,6 +5,7 @@ import java.util.List;
 /**
  * Paginated list.
  *
+ * @param <T> Type of list elements
  * @author jtremeaux
  */
 public class PaginatedList<T> {
