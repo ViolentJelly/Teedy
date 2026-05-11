@@ -10,6 +10,8 @@ import java.util.List;
 
 /**
  * Classes scanner.
+ *
+ * @param <T> Class type to scan for
  */
 public class ClasspathScanner<T> {
     /**
