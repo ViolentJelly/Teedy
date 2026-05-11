@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="maven-antrun-" default="main">
+  <target name="main">
+    <replace includes="*.html" dir="/home/jelly/center/study/SE/Teedy/target/site" value="href=&quot;../../docs-core/target/site/index.html&quot;" token="href=&quot;../../docs-core/target/staging/docs-core/index.html&quot;" />
+    <replace includes="*.html" dir="/home/jelly/center/study/SE/Teedy/target/site" value="href=&quot;../../docs-core/target/site/index.html&quot;" token="href=&quot;./../../docs-core/target/staging/docs-core/index.html&quot;" />
+    <replace includes="*.html" dir="/home/jelly/center/study/SE/Teedy/target/site" value="href=&quot;../../docs-core/target/site/index.html&quot;" token="href=&quot;docs-core/index.html&quot;" />
+    <replace includes="*.html" dir="/home/jelly/center/study/SE/Teedy/target/site" value="href=&quot;../../docs-core/target/site/index.html&quot;" token="href=&quot;./docs-core/index.html&quot;" />
+    <replace includes="*.html" dir="/home/jelly/center/study/SE/Teedy/target/site" value="href=&quot;../../docs-web-common/target/site/index.html&quot;" token="href=&quot;../../docs-web-common/target/staging/docs-web-common/index.html&quot;" />
+    <replace includes="*.html" dir="/home/jelly/center/study/SE/Teedy/target/site" value="href=&quot;../../docs-web-common/target/site/index.html&quot;" token="href=&quot;./../../docs-web-common/target/staging/docs-web-common/index.html&quot;" />
+    <replace includes="*.html" dir="/home/jelly/center/study/SE/Teedy/target/site" value="href=&quot;../../docs-web-common/target/site/index.html&quot;" token="href=&quot;docs-web-common/index.html&quot;" />
+    <replace includes="*.html" dir="/home/jelly/center/study/SE/Teedy/target/site" value="href=&quot;../../docs-web-common/target/site/index.html&quot;" token="href=&quot;./docs-web-common/index.html&quot;" />
+    <replace includes="*.html" dir="/home/jelly/center/study/SE/Teedy/target/site" value="href=&quot;../../docs-web/target/site/index.html&quot;" token="href=&quot;../../docs-web/target/staging/docs-web/index.html&quot;" />
+    <replace includes="*.html" dir="/home/jelly/center/study/SE/Teedy/target/site" value="href=&quot;../../docs-web/target/site/index.html&quot;" token="href=&quot;./../../docs-web/target/staging/docs-web/index.html&quot;" />
+    <replace includes="*.html" dir="/home/jelly/center/study/SE/Teedy/target/site" value="href=&quot;../../docs-web/target/site/index.html&quot;" token="href=&quot;docs-web/index.html&quot;" />
+    <replace includes="*.html" dir="/home/jelly/center/study/SE/Teedy/target/site" value="href=&quot;../../docs-web/target/site/index.html&quot;" token="href=&quot;./docs-web/index.html&quot;" />
+  </target>
+</project>
