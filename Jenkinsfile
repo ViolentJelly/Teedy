@@ -16,7 +16,7 @@ pipeline {
 				checkout scmGit(
 					branches: [[name: '*/master']],
 					extensions: [],
-					userRemoteConfigs: [[url: 'https://github.com/xx/Teedy.git']]
+					userRemoteConfigs: [[url: 'https://github.com/ViolentJelly/Teedy.git']]
 				)
 				sh 'mvn -B -DskipTests clean package'
 			}
