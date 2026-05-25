@@ -34,9 +34,13 @@ pipeline {
 		stage('Upload Image') {
 			steps {
 				script {
-					docker.withRegistry('https://registry.hub.docker.com', DOCKER_HUB_CREDENTIALS) {
-						docker.image("${env.DOCKER_IMAGE}:${env.DOCKER_TAG}").push()
-						docker.image("${env.DOCKER_IMAGE}:${env.DOCKER_TAG}").push('latest')
+					def imageRef = "${env.DOCKER_IMAGE}:${env.DOCKER_TAG}"
+					sh "docker image inspect ${imageRef} >/dev/null"
+					echo "Pushing ${imageRef} to Docker Hub"
+					docker.withRegistry('', DOCKER_HUB_CREDENTIALS) {
+						def builtImage = docker.image(imageRef)
+						builtImage.push()
+						builtImage.push('latest')
 					}
 				}
 			}
