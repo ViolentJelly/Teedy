@@ -39,14 +39,21 @@ pipeline {
 					sh "docker image inspect ${imageRef} >/dev/null"
 					echo "Pushing ${imageRef} to Docker Hub"
 					withCredentials([usernamePassword(credentialsId: DOCKER_HUB_CREDENTIALS, usernameVariable: 'DOCKER_HUB_USERNAME', passwordVariable: 'DOCKER_HUB_TOKEN')]) {
-						sh """#!/bin/sh
-						set -eu
-						echo "$DOCKER_HUB_TOKEN" | docker login --username "$DOCKER_HUB_USERNAME" --password-stdin
-						docker push "${imageRef}"
-						docker tag "${imageRef}" "${latestRef}"
-						docker push "${latestRef}"
-						docker logout || true
-						"""
+						withEnv(["IMAGE_REF=${imageRef}", "LATEST_REF=${latestRef}", "DOCKER_CONFIG=${env.WORKSPACE}/.docker-tmp"]) {
+							retry(3) {
+								sh '''#!/bin/sh
+								set -eu
+								mkdir -p "$DOCKER_CONFIG"
+								printf '{}' > "$DOCKER_CONFIG/config.json"
+								echo "$DOCKER_HUB_TOKEN" | docker login --username "$DOCKER_HUB_USERNAME" --password-stdin
+								docker push "$IMAGE_REF"
+								docker tag "$IMAGE_REF" "$LATEST_REF"
+								docker push "$LATEST_REF"
+								docker logout || true
+								rm -rf "$DOCKER_CONFIG"
+								'''
+							}
+						}
 					}
 				}
 			}
