@@ -31,7 +31,7 @@ pipeline {
 			}
 		}
 
-		stage('Push Image') {
+		stage('Upload Image') {
 			steps {
 				script {
 					docker.withRegistry('https://registry.hub.docker.com', DOCKER_HUB_CREDENTIALS) {
