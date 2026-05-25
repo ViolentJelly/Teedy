@@ -35,12 +35,18 @@ pipeline {
 			steps {
 				script {
 					def imageRef = "${env.DOCKER_IMAGE}:${env.DOCKER_TAG}"
+					def latestRef = "${env.DOCKER_IMAGE}:latest"
 					sh "docker image inspect ${imageRef} >/dev/null"
 					echo "Pushing ${imageRef} to Docker Hub"
-					docker.withRegistry('', DOCKER_HUB_CREDENTIALS) {
-						def builtImage = docker.image(imageRef)
-						builtImage.push()
-						builtImage.push('latest')
+					withCredentials([usernamePassword(credentialsId: DOCKER_HUB_CREDENTIALS, usernameVariable: 'DOCKER_HUB_USERNAME', passwordVariable: 'DOCKER_HUB_TOKEN')]) {
+						sh """#!/bin/sh
+						set -eu
+						echo "$DOCKER_HUB_TOKEN" | docker login --username "$DOCKER_HUB_USERNAME" --password-stdin
+						docker push "${imageRef}"
+						docker tag "${imageRef}" "${latestRef}"
+						docker push "${latestRef}"
+						docker logout || true
+						"""
 					}
 				}
 			}
